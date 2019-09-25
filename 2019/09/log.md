@@ -48,3 +48,12 @@ vscode  c++不好调试；
 1、Go js api
 
 2、ipc通信，通过promise 可以产生回调
+
+
+### 24
+git细分操作，一个bug一次提交，
+review代码
+
+
+### 25
+一个面试提
