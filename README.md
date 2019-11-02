@@ -4,11 +4,13 @@
 
 - * 好文分享 [从event loop规范探究javaScript异步及浏览器更新渲染时机](https://github.com/aooy/blog/issues/5)
 
-- 撒打算实
-
 ## 二月份
 
 - * 好文分享 [vue2.0的diff算法](https://github.com/aooy/blog/issues/2)
+- 代码：节流防抖 
+
+## 八月份
+- [electron下的动态js代码实现代码安全的一种考虑](https://github.com/liubailing/pack-gulp-browserify)
 
 ## 十月份
   
