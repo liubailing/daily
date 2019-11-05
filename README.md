@@ -16,6 +16,7 @@
   
 - windows 环境下electron安装包打点， [electron打包 demo](https://github.com/liubailing/electron-builder-test)
 - electron  ipc通信
+- electron  [跨域 bug 解决办法](https://github.com/liubailing/daily/blob/master/2019/11/log%20electron.md)
 
 
 
