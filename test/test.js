@@ -1,21 +1,21 @@
-(function () {
-    try {
-        let iframeNode = document.evaluate(`//IFRAME[@id='g_iframe']`,
-            document.documentElement, null,
-            XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-        debugger;
-        if (!iframeNode) return 'error iframe';
-        let str = document.evaluate(`//DIV[@id='song-list-pre-cache']/DIV[1]/DIV[1]/TABLE[1]/TBODY[1]/TR`,
-            iframeNode.contentWindow.document.documentElement,
-            null,
-            XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-        console.log('str::', str);
-        return str;
-    } catch (error) {
-        console.error(error);
-        return false;
-    }
-})()
+    (function () {
+        try {
+            let iframeNode = document.evaluate(`//IFRAME[@id='g_iframe']`,
+                document.documentElement, null,
+                XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+            debugger;
+            if (!iframeNode) return 'error iframe';
+            let str = document.evaluate(`//DIV[@id='song-list-pre-cache']/DIV[1]/DIV[1]/TABLE[1]/TBODY[1]/TR`,
+                iframeNode.contentWindow.document.documentElement,
+                null,
+                XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+            console.log('str::', str);
+            return str;
+        } catch (error) {
+            console.error(error);
+            return false;
+        }
+    })()
 
 
     (function () {
