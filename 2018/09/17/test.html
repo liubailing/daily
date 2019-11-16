@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>高度坍塌问题</title>
+</head>
+<style>
+    .clearfix {
+        zoom: 1;
+    }
+
+    .clearfix:after {
+        content: ".";
+        display: block;
+        height: 0;
+        visibility: hidden;
+        clear: both
+    }
+
+    .content {
+        display: block;
+        padding: 5px 50px;
+    }
+
+    .box {
+        float: left;
+        display: block;
+        padding: 5px 20px;
+        margin-right: 5px;
+        border: 1px #ddd solid;
+        max-width: 300px;
+    }
+
+
+    .block {}
+
+
+    h1 {
+        text-align: center;
+    }
+
+    h3 {
+        font-size: 14px;
+    }
+
+    .block {
+        background: #cccccc;
+    }
+
+    .aside {
+        width: 100px;
+        height: 100px;
+        background: orange;
+    }
+
+    .main {
+        background: yellow;
+    }
+</style>
+<style>
+    .pos {
+        position: relative;
+        background: red;
+        overflow: hidden;
+    }
+
+    .pos1 {
+        position: absolute;
+        padding: 2px;
+    }
+</style>
+
+<style type="text/css">
+    .floatBox .block {
+        margin-top: 30px;
+    }
+
+    .floatBox .aside {
+        float: left;
+    }
+</style>
+
+<style type="text/css">
+    .posBox .block {
+        position: relative;
+    }
+
+    .posBox .aside {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    .posBox .main {
+        margin-left: 100px;
+    }
+</style>
+
+<style type="text/css">
+    .flexBox .block {
+        display: flex;
+    }
+
+    .flexBox .aside {}
+
+    .flexBox .main {}
+</style>
+
+<body>
+    <div class="content">
+        <!-- -->
+        <div class="box flexBox">
+            <h1>flex:布局 </h1>
+            <hr>
+            <h3>1.子元素总宽度 大于 父级宽度的时候，（会自适应，这个就有点蛋疼了） </h3>
+            <div class="block ">
+                <div class="aside" style="opacity:.6;">aside11</div>
+                <div class="main">main</div>
+                <div class="" style="width: 100%; background: #000;">三</div>
+            </div>
+        </div>
+        <!-- -->
+        <div class="box">
+            <h1>display:高度坍塌 </h1>
+            <hr>
+            <h3>1.行内元素height weight 不能生效。 </h3>
+            <div class="block" style="overflow: hidden;">
+                <span class="aside" style="">aside</span>
+                <span class="main" style="">main</span>
+            </div>
+            <hr>
+            <h3>2.行内元素水平方向的margin-left; margin-right;;可以生效。但是竖直方向的margin-bottom; margin-top;
+                却不能生效。 </h3>
+            <div class="block" style="overflow: hidden;">
+                <span class="aside" style="display: inline; margin: 10px;">aside</span>
+                <span class="main" style="">main</span>
+            </div>
+
+            <hr>
+            <h3>3行内元素水平方向的padding-left; padding-right;可以生效。但是竖直方向的
+                padding-top; padding-bottom;却不能生效。 </h3>
+            <div class="block">
+                <span class="aside" style="">aside</span>
+                <span class="main" style="padding: 10px;">main</span>
+            </div>
+            <hr>
+            <h5>以上问题都可以 通过（ inline-block）不过这个好像有点过了~!~ </h5>
+            <h6>就好像说病人的腿有毛病想医治，结果医生直接把腿换了，虽然换腿也是医治，但... </h6>
+
+        </div>
+
+        <!-- -->
+        <div class="box floatBox">
+            <h1>float:高度坍塌 </h1>
+            <hr>
+            <h3>1.在父元素结束前添加一个宽高为0，clear:both 的空div </h3>
+            <div class="block">
+                <div class="aside">aside</div>
+                <div class="main">main</div>
+                <div class="clearfix"></div>
+            </div>
+            <!-- .使用after伪对象清除浮动-->
+            <hr>
+            <h3>2.为父元素添加overflow: hidden</h3>
+            <div class="block" style="overflow: hidden">
+                <div class="aside">aside</div>
+                <div class="main">main</div>
+            </div>
+            <!-- 添加伪元素 :after 解决float 坍塌问题-->
+            <hr>
+            <h3>3.使用after伪对象清除浮动</h3>
+            <div class="block clearfix">
+                <div class="aside">aside</div>
+                <div class="main">main</div>
+            </div>
+            <!-- 添加伪元素 :after 解决float 坍塌问题-->
+            <!-- <hr>
+            <h3>5.使用after伪对象清除浮动</h3>
+            <div class="block" style="float: left; overflow: hidden;">
+                <div class="aside" style="display: inline-block;">aside</div>
+                <div class="main">main</div>
+            </div> -->
+        </div>
+
+        <!-- -->
+        <div class="box posBox">
+            <h1>position:高度坍塌 </h1>
+            <hr>
+            <h3>1.父级元素设高度，（废话） </h3>
+            <div class="block " style="height: 100px;">
+                <div class="aside">aside</div>
+                <div class="main">main</div>
+            </div>
+            <!-- .使用after伪对象清除浮动-->
+            <hr>
+            <h3>2.父级：overflow: hidden, 给第二个div设置margin-top且值设为大于等于固定定位模块的高度,(灰常鸡肋)</h3>
+            <div class="block" style="overflow: hidden">
+                <div class="aside">aside</div>
+                <div class="main">main</div>
+                <div style="margin-top: 80px;"></div>
+            </div>
+            <h3>3.给第二个div设置margin-top且值设为大于等于固定定位模块的高度,height: 1px; visibility: hidden;(灰常鸡肋)</h3>
+            <div class="block" style="overflow: hidden">
+                <div class="aside">aside</div>
+                <div class="main">main</div>
+                <div style="margin-top: 80px;height: 1px; visibility: hidden;"></div>
+            </div>
+            <h3>4.给父级元素设置line-height:且值设为大于等于固定定位模块的高度,（副作用大...）</h3>
+            <div class="block" style="line-height: 100px;">
+                <div class="aside">aside</div>
+                <div class="main">main</div>
+            </div>
+        </div>
+
+
+</body>
+
+</html>
