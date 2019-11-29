@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>模拟一次“enter”输入！</title>
+   
+</head>
+    <div><input id="test" value="123"> </input></div>
+    <div><input id="key" value="key"> </input></div>
+<body>
+
+</body>
+<script>
+    document.addEventListener('keydown', (event) => {
+        const keyName = event.key;
+
+        if (keyName === 'Control') {
+            // do not alert when only Control key is pressed.
+            return;
+        }
+
+        if (event.ctrlKey) {
+            // Even though event.key is not 'Control' (e.g., 'a' is pressed),
+            // event.ctrlKey may be true if Ctrl key is pressed at the same time.
+            console.log(`Combination of ctrlKey + ${keyName}`);
+        } else {
+            console.log(`Key pressed ${keyName}`, event);
+        }
+    }, false);
+
+    document.addEventListener('keyup', (event) => {
+        const keyName = event.key;
+
+        // As the user releases the Ctrl key, the key is no longer active,
+        // so event.ctrlKey is false.
+        if (keyName === 'Control') {
+            console.log('Control key was released');
+        }
+    }, false);
+
+    let j = 0;
+
+
+
+    let timer = setInterval(() => {
+        if (j++ > 2) {
+            clearInterval(timer)
+            return
+        };
+
+        /** 按键 */
+        let keyboardEvent = new KeyboardEvent('keydown', {
+            bubbles: true
+        });
+        Object.defineProperty(keyboardEvent, 'charCode', {
+            value: '0'
+        });
+       
+        Object.defineProperty(keyboardEvent, 'keyCode', {
+            value: 13
+        });
+        Object.defineProperty(keyboardEvent, 'key', {
+            value: 'Enter'
+        });
+        Object.defineProperty(keyboardEvent, 'code', {
+            value: 'Enter'
+        });
+
+        document.getElementById("test").dispatchEvent(keyboardEvent);
+        //document.body.dispatchEvent(keyboardEvent);
+
+
+    }, 1000)
+
+
+    /**
+     *  页面自动提交
+     *  1、 form 提交，dom结构上寻找父级form 如果找到了，form submit
+     *  2、 如果没有form  就模拟一次enter输入了。这个时候需要注意的 focus 在自身的元素上 
+     */
+    ;(function(){
+            try{
+            let frameXPath = '';
+            let docElement;
+            if(frameXPath.length>0){
+                let iframeElement = document.evaluate(frameXPath, document.documentElement, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+                if(!iframeElement){
+                    return JSON.stringify({IsFrameExist:false});
+                }
+                docElement = iframeElement.contentWindow.document.documentElement;
+            }else{
+                docElement = document.documentElement;   
+            }
+            let inputElement = document.evaluate('//INPUT[@id="key"]', docElement, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+            if(!inputElement){
+                return JSON.stringify({IsElementExist:false});
+            }
+            var ev_mousedown = new MouseEvent("mousedown", {
+                cancelable: true,
+                bubble: true,
+                view: window
+            });
+            inputElement.dispatchEvent(ev_mousedown);
+            inputElement.focus();
+            var ev_mouseup = new MouseEvent("mouseup", {
+                cancelable: true,
+                bubble: true,
+                view: window
+            });         
+            inputElement.focus();
+            if(inputElement){
+                let pF;
+                let temp= inputElement ;
+                let i =0;
+                let isEnter = false
+                do{                    
+                    temp = temp && temp.parentNode || undefined;
+                    if(temp && temp.tagName && temp.tagName === 'FORM'){
+                        temp.submit();
+                        isEnter = true;
+                        break;
+                    }
+                    //console.log(i,temp.tagName);
+					i++;
+                }while(i<15);
+
+                if(!isEnter){
+                    let keyboardEvent = new KeyboardEvent('keydown', {bubbles: true});
+                    Object.defineProperty(keyboardEvent, 'charCode', {value: '0'});                   
+                    Object.defineProperty(keyboardEvent, 'keyCode', {value: 13});
+                    Object.defineProperty(keyboardEvent, 'key', { value: 'Enter' });
+                    Object.defineProperty(keyboardEvent, 'code', {value: 'Enter'});
+                    inputElement.dispatchEvent(keyboardEvent);
+                }
+            }
+
+            }catch(error){
+                console.error(error);
+                return {IsElementExist:false};
+            }
+        })();
+
+</script>
+</html>
