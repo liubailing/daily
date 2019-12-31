@@ -1,3 +1,10 @@
+
+/**
+ *
+ *
+ * @param {*} str
+ * @returns
+ */
 function brackets(str) {
     var strArr = str.split('');
  
@@ -28,7 +35,9 @@ function brackets(str) {
         if (num > 0) {
             arr.push(num);
         } else {
+            // console.log(arr)
             var prev = arr.pop();
+            console.log(prev,num)
             if (Number(prev + num)) {
                 flag = false;
             }
@@ -39,4 +48,4 @@ function brackets(str) {
  
 var str1 = '{{{{}}}([)]}';
 var str2 = '{{{{}}}[()]}';
-console.log(cbrackets(str1)) // 返回f
+console.log(brackets(str2)) // 返回f

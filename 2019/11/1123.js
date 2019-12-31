@@ -1,18 +1,23 @@
 // for (var i = 0; i <= 10; i++) {
-    
+
 //     ((j) => {setTimeout(() => {
 //         console.log(j)
 //     }, j*3000)})(i)
 // }
 
-var g = gen();
-function*  gen(){
-   yield console.log(1,console.log(g))
-   yield console.log(2)
-   yield console.log(3) 
+
+function* gen(str) {
+    let res = yield console.log(str)
+    res = yield console.log(res)
+    res = yield console.log(res)
 }
 
 
-console.log(g.next())
-// g.next()
-// g.next()
+var g = gen(1);
+// g.next(2)
+// g.next(3)
+
+setTimeout(() => {
+    g.next(2)
+}, 10);
+g.next(3)
