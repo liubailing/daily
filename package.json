@@ -1,0 +1,21 @@
+{
+	"name": "test",
+	"productName": "",
+	"private": true,
+	"main": "./src",
+	"DEV": false,
+	"devDependencies": {
+		"@types/jest": "^26.0.3",
+		"@typescript-eslint/eslint-plugin": "^3.5.0",
+		"@typescript-eslint/parser": "^3.5.0",
+		"eslint": "^7.4.0",
+		"eslint-config-alloy": "^3.7.3",
+		"jest": "^26.1.0",
+		"jest-pnp-resolver": "^1.2.2",
+		"jest-resolve": "^26.1.0",
+		"jest-watch-typeahead": "^0.6.0",
+		"ts-jest": "^26.1.1",
+		"source-map-support": "0.5.19",
+		"typescript": "^3.9.6"
+	}
+}
